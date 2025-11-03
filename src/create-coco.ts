@@ -62,13 +62,19 @@ async function create(type: 'app' | 'lib') {
     // 复制非ejs文件
     const noEjsFiles = glob.sync(`**/*`, {
         cwd: tempFolderPath,
-        ignore: '**/*.ejs',
+        ignore: ['**/*.ejs', '**/gitignore'],
         nodir: true,
     });
     for (const file of noEjsFiles) {
         const sourcePath = path.join(tempFolderPath, file);
         const targetPath = path.join(targetDir, file);
         fse.copySync(sourcePath, targetPath);
+    }
+
+    // .gitignore文件是通过gitignore文件生成的
+    const gitIgnorePath = path.join(tempFolderPath, 'gitignore');
+    if (fse.pathExistsSync(gitIgnorePath)) {
+        fse.copySync(gitIgnorePath, path.join(targetDir, '.gitignore'));
     }
 
     // 生成package.json

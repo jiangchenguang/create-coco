@@ -30,6 +30,12 @@ async function create(type: 'app' | 'lib') {
                 },
                 initial: true,
             },
+            {
+                type: 'toggle',
+                name: 'useTailwindcss',
+                message: '是否使用Tailwindcss？',
+                initial: false,
+            },
         ],
         {
             onCancel: () => {
@@ -41,7 +47,7 @@ async function create(type: 'app' | 'lib') {
     if (userCancelled) {
         return;
     }
-    const { projectName, author, deleteExistFolder } = response;
+    const { projectName, author, deleteExistFolder, useTailwindcss } = response;
     const targetDir = path.resolve(process.cwd(), projectName);
     if (deleteExistFolder === false) {
         return;
@@ -49,7 +55,17 @@ async function create(type: 'app' | 'lib') {
         fse.removeSync(targetDir);
     }
 
-    const folder = type === 'app' ? 'app' : type === 'lib' ? 'lib' : '';
+    let folder = '';
+    switch (type) {
+        case 'app': {
+            folder = useTailwindcss ? 'app-tailwind' : 'app';
+            break;
+        }
+        case 'lib': {
+            folder = 'lib';
+            break;
+        }
+    }
     if (!folder) {
         console.error('指定的模版目录不应该为空，', type);
         return;

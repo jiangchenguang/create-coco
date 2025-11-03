@@ -8,9 +8,7 @@
     },
     "files": [
         "bin",
-        "template-app",
-        "template-app/.gitignore",
-        "template-lib",
+        "template",
         "dist"
     ],
     "scripts": {

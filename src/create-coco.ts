@@ -5,19 +5,34 @@ import path from 'path';
 import fse from 'fs-extra';
 import process from 'process';
 
-async function create(type: 'app' | 'lib') {
+async function create() {
     let userCancelled = false;
     const response = await prompts(
         [
             {
+                type: 'select',
+                name: 'type',
+                message: '项目类型',
+                choices: [
+                    { title: '应用', description: '基于前端路由的CSR项目', value: 'app' },
+                    { title: '库', description: '可供复用的组件库或工具库项目', value: 'lib' }
+                ],
+            },
+            {
                 type: 'text',
                 name: 'projectName',
-                message: '项目名称（在当前目录下新建文件夹，且设置package.json的name）？',
+                message: '项目名称（在当前目录下新建文件夹，且设置package.json的name）',
+                validate: (value: string) => {
+                    if (!value.trim()) {
+                        return '项目名称不能为空';
+                    }
+                    return true;
+                },
             },
             {
                 type: 'text',
                 name: 'author',
-                message: '作者（package.json的author）？',
+                message: '作者',
             },
             {
                 type: (projectName: string) => {
@@ -31,10 +46,13 @@ async function create(type: 'app' | 'lib') {
                 initial: true,
             },
             {
-                type: 'toggle',
+                type: 'select',
                 name: 'useTailwindcss',
-                message: '是否使用Tailwindcss？',
-                initial: false,
+                message: '是否使用tailwindcss',
+                choices: [
+                    { title: '是', description: '集成tailwindcss及构建配置', value: true },
+                    { title: '否', description: '不集成任何样式库', value: false }
+                ]
             },
         ],
         {
@@ -47,7 +65,7 @@ async function create(type: 'app' | 'lib') {
     if (userCancelled) {
         return;
     }
-    const { projectName, author, deleteExistFolder, useTailwindcss } = response;
+    const { type, projectName, author, deleteExistFolder, useTailwindcss } = response;
     const targetDir = path.resolve(process.cwd(), projectName);
     if (deleteExistFolder === false) {
         return;
@@ -107,24 +125,9 @@ async function create(type: 'app' | 'lib') {
     await fse.outputFileSync(path.join(targetDir, 'package.json'), renderedContent);
 }
 
-const createApp = () => create('app');
-const createLib = () => create('lib');
-
-function cli(command: string, type: string) {
-    switch (type) {
-        case 'app': {
-            createApp();
-            break;
-        }
-        case 'lib': {
-            createLib();
-            break;
-        }
-        default: {
-            console.warn(`create后面的参数只能是: app 或 lib，当前为: ${type}`);
-            break;
-        }
-    }
+function cli() {
+    create()
 }
 
+// TODO: 添加测试
 export { cli };

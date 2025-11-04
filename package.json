@@ -1,7 +1,7 @@
 {
     "name": "create-coco",
     "description": "Create a new cocojs project in seconds.",
-    "version": "0.0.1-alpha202511032153",
+    "version": "0.0.1-alpha202511042024",
     "main": "dist/index.js",
     "bin": {
         "create-coco": "bin/create-coco.js"

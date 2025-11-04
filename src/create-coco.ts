@@ -4,6 +4,7 @@ import prompts from 'prompts';
 import path from 'path';
 import fse from 'fs-extra';
 import process from 'process';
+import { cliVersion, mvcVersion } from './version';
 
 async function create() {
     let userCancelled = false;
@@ -113,9 +114,6 @@ async function create() {
 
     // 生成package.json
     const packageJsonEjs = path.resolve(tempFolderPath, 'package.json.ejs');
-    // TODO:create-coco的版本号和当前包保持一致；create-coco的版本号先手动维护吧
-    const cliVersion = '0.0.1-alpha202511021502';
-    const mvcVersion = '0.0.1-alpha202510092123';
     const renderedContent = await ejs.renderFile(packageJsonEjs, {
         name: projectName,
         author,

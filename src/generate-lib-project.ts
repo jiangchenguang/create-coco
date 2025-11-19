@@ -14,13 +14,15 @@ const devProjectName = 'dev';
 /**
  * @param targetDir 在这个目录下新建一个projectName的文件夹，而不是这个目录是代码仓库根目录
  * @param projectName 指定的项目名称，也作为文件夹名称
+ * @param useTailwindcss 是否使用tailwindcss
  */
 async function generateLibProject(
     targetDir: string,
     projectName: string,
+    useTailwindcss: boolean,
 ) {
     const targetProjectDir = path.join(targetDir, projectName);
-    const templateFolder = path.resolve(__dirname, '..', 'template', 'lib');
+    const templateFolder = path.resolve(__dirname, '..', 'template', useTailwindcss ? 'lib-tailwind' : 'lib');
     // 复制非ejs文件
     const noEjsFiles = glob.sync(`**/*`, {
         cwd: templateFolder,

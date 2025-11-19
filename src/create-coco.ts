@@ -97,7 +97,7 @@ async function create() {
         return;
     }
     if (type === 'lib') {
-        await generateLibProject(process.cwd(), projectName);
+        await generateLibProject(process.cwd(), projectName, useTailwindcss);
         return;
     }
     // 复制非ejs文件

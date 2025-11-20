@@ -3,14 +3,14 @@
   "version": "0.0.1",
   "description": "",
   "type": "module",
-  "module": "dist/bundle.esm.js",
-  "types": "dist/types/lib.d.ts",
+  "module": "dist/index.esm.js",
+  "types": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
     "build:lib": "coco lib build",
-    "build:css": "tailwindcss -i ./src/input.css -o ./dist/bundle.css",
+    "build:css": "tailwindcss -i ./src/input.css -o ./dist/index.css",
     "build": "pnpm run build:lib && pnpm run build:css"
   },
   "keywords": [],

@@ -32,4 +32,4 @@ jobs:
       - name: Prettier check
         run: pnpm run prettier:check
       - run: pnpm run build
-      - run: pnpm publish --no-git-checks
+      - run: pnpm publish --no-git-checks --tag alpha

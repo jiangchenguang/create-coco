@@ -1,7 +1,7 @@
 {
     "name": "create-coco",
     "description": "Create a new cocojs project in seconds.",
-    "version": "0.0.1-alpha202511221309",
+    "version": "0.0.1-alpha202511221313",
     "main": "dist/index.js",
     "bin": {
         "create-coco": "bin/create-coco.js"
@@ -18,6 +18,10 @@
     },
     "keywords": [],
     "homepage": "https://github.com/cocojs-org/create-coco",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/cocojs-org/create-coco.git"
+    },
     "license": "MIT",
     "devDependencies": {
         "@babel/preset-env": "^7.28.5",

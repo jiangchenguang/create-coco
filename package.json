@@ -1,7 +1,7 @@
 {
     "name": "create-coco",
     "description": "Create a new cocojs project in seconds.",
-    "version": "0.0.1-alpha202511221246",
+    "version": "0.0.1-alpha202511221252",
     "main": "dist/index.js",
     "bin": {
         "create-coco": "bin/create-coco.js"
@@ -19,7 +19,6 @@
     "keywords": [],
     "homepage": "https://github.com/cocojs-org/create-coco",
     "license": "MIT",
-    "packageManager": "pnpm@10.20.0",
     "devDependencies": {
         "@babel/preset-env": "^7.28.5",
         "@rollup/plugin-babel": "^6.1.0",
@@ -35,5 +34,9 @@
         "fs-extra": "^11.3.2",
         "glob": "^11.0.3",
         "prompts": "^2.4.2"
+    },
+    "packageManager": "pnpm@10.20.0",
+    "pnpm": {
+        "git-checks": false
     }
 }

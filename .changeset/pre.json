@@ -1,0 +1,8 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "create-coco": "0.0.1-alpha202511221313"
+  },
+  "changesets": []
+}

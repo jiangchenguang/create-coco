@@ -2,4 +2,4 @@
 'create-coco': minor
 ---
 
-进入 beta版本
+测试发布

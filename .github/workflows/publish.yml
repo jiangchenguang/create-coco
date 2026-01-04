@@ -26,15 +26,21 @@ jobs:
         with:
           use-node-version: true  # 启用自动版本检测
       # Ensure npm 11.5.1 or later is installed
+
       - name: Update npm
         run: npm install -g npm@latest
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm run build
+
       - name: Create and publish pre-release versions (OIDC)
         uses: changesets/action@v1
         with:
           commit: "chore: update pre-release versions [OIDC]"
           title: "chore: update pre-release versions (OIDC)"
-          publish: pnpm run release
+          publish: pnpm changeset publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
